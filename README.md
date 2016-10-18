@@ -1,5 +1,9 @@
 # test
-# 得到项目
+名词解释
+ILP：指令级并行。
+CPI：每条指令占的周期数。
+
+
 # git clone https://github.com/shang-qd/test.git
 # 提交修改
 # git add 文件名称
