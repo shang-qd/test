@@ -1,4 +1,7 @@
 # test
+# 得到项目
+# git clone https://github.com/shang-qd/test.git
+# 提交修改
 # git add 文件名称
 # git commit -m '说明'
 # git push
