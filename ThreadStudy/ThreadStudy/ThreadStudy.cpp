@@ -2,11 +2,14 @@
 //
 
 #include "stdafx.h"
+#include <iostream>
+#include <vector>
+#include <thread>
 
+using namespace std;
 
 int _tmain(int argc, _TCHAR* argv[])
 {
-	printf("abc \n");
+	printf("³ÌÐòÍê³É \n");
 	return 0;
 }
-
