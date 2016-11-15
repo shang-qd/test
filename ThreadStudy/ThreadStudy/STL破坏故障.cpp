@@ -35,9 +35,9 @@ static int test_main(int argc, _TCHAR* argv[])
 	{
 		t[i] = std::thread(fun, i);
 	}
-	for (int i = 0; i < num_threads; i++)
+	for (auto& th : t)
 	{
-		t[i].join();
+		th.join();
 	}
 	printf("³ÌÐòÍê³É \n");
 	return 0;

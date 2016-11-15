@@ -5,11 +5,13 @@
 #include <iostream>
 #include <vector>
 #include <thread>
+#include <string>
+#include <mutex>
 
 using namespace std;
+static mutex g_mutex;
 
 int _tmain(int argc, _TCHAR* argv[])
 {
-	printf("³ÌÐòÍê³É \n");
 	return 0;
 }
