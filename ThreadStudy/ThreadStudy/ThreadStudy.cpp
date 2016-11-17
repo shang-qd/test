@@ -30,7 +30,7 @@ void fun(int id)
 }
 
 
-int _tmain(int argc, _TCHAR* argv[])
+int _tmainabc(int argc, _TCHAR* argv[])
 {
 	thread B(fun, 1);
 	thread C(fun, 2);
