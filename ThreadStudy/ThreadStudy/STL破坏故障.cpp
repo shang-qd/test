@@ -31,7 +31,7 @@ static void fun(int n)
 
 #define num_threads 4
 
-int _tmain(int argc, _TCHAR* argv[])
+int _tmainaa(int argc, _TCHAR* argv[])
 { 
 	std::thread t[num_threads];
 	for (int i = 0; i < num_threads; i++)
