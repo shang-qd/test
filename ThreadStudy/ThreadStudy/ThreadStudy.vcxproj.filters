@@ -47,5 +47,8 @@
     <ClCompile Include="SyncExample\producer_consumer.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="read_write.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

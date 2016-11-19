@@ -1,122 +1,171 @@
 // ThreadStudy.cpp : 定义控制台应用程序的入口点。
 //
+// C11 特性总结
 
 #include "stdafx.h"
 #include <iostream>  
 #include <vector>
-#include <thread>  
-#include <mutex>  
-#include <condition_variable>  
+#include <map>
+#include <string>
 
-using namespace std;
-
-std::mutex g_mutex;
-// 空位置的数量
-std::condition_variable g_solt;
-// 数据位置的数量
-std::condition_variable g_item;
-
-std::vector<int> vi;
-
-bool f_solt()
+void 性质1()
 {
-	if (vi.size() < 10)
+	// 类型自动推导
+	auto i = 42;        // i is an int
+	auto l = 42LL;      // l is an long long
+
+	// 下面的就很方面了
+	std::vector<int> vi;
+	for (std::vector<int>::iterator ite = vi.begin(); ite != vi.end(); ++ite)
 	{
-		return true;
 	}
-	else
+	for (auto ite = vi.begin(); ite != vi.end(); ++ite)
 	{
-		return false;
 	}
 }
 
-bool f_item()
+void 性质2()
 {
-	if (vi.size() > 0)
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+	// 空指针有宏提升为关键字，带来了更加安全的编译检查
+	int res = 0;
+	int *p1 = nullptr;
+	int *p2 = NULL;
+	// 不能编译通过
+	//int i1 = nullptr;
+	//可以编译通过
+	//int i2 = NULL;
 }
 
-void subf_insert(int item)
+void 性质3()
 {
-	std::unique_lock <std::mutex> lck(g_mutex);
-	// 如果条件为真就不睡眠
-	g_solt.wait(lck,f_solt);
-	vi.push_back(item);
-	g_item.notify_one();
-}
+	// 原来繁琐的循环现在变得简单多了
+	std::map<std::string, std::vector<int>> map;
+	std::vector<int> v;
+	v.push_back(1);
+	v.push_back(2);
+	v.push_back(3);
 
-int subf_remove()
-{
-	std::unique_lock <std::mutex> lck(g_mutex);
-	g_item.wait(lck,f_item);
-	int item = vi[vi.size() - 1];
-	vi.pop_back();
-	g_solt.notify_one();
-	return item;
-}
+	map["one"] = v;
 
-mutex mutex_print;
-
-void f1()
-{
-	int c = 0;
-	while (true)
+	for (const auto & kvp : map)
 	{
-		c++;
-		int i = rand();
-		subf_insert(i);
-		//mutex_print.lock();
-		//std::cout << this_thread::get_id() << "生产数据:" << i << "库存:" << vi.size() << endl;
-		//mutex_print.unlock();
-		//this_thread::sleep_for(chrono::seconds(1));
-		if (c > 100000)
+		std::cout << kvp.first << std::endl;
+		for (auto v : kvp.second)
 		{
-			//mutex_print.lock();
-			//std::cout << "??????" << std::endl;
-			printf("??????? \n");
-			//mutex_print.unlock();
-			break;
+			std::cout << v << std::endl;
 		}
 	}
-}
-
-void f2()
-{
-	int c = 0;
-	while (true)
+	int arr[] = { 1, 2, 3, 4, 5 };
+	for (auto& e : arr)
 	{
-		c++;
-		int i = subf_remove();
-		//mutex_print.lock();
-		//std::cout << this_thread::get_id() << "消费数据:" << i  << "库存:" << vi.size() << endl;
-		//mutex_print.unlock();
-		//this_thread::sleep_for(chrono::seconds(1));
-		if (c > 200000)
-		{
-			//mutex_print.lock();
-			printf("------------ \n");
-			//std::cout << "-----" << std::endl;
-			//mutex_print.unlock();
-			break;
-		}
+		e = e * e;
 	}
 }
 
-int _tmain__(int argc, _TCHAR* argv[])
+
+void 性质4()
 {
-	std::cout << "...." << endl;
-	thread t1(f1);
-	thread t3(f1);
-	thread t2(f2);
-	t1.join();
-	t2.join();
-	t3.join();
-	std::cout << "++++++++++" << std::endl;
+	// 让不明确的重载变的明确
+	// 这个经常变成考试程序员的一个头疼题目
+	// 现在做了更加严格的检查，声明想重载，和不想重载
+	{
+		class A
+		{
+		public:
+			virtual void f(short) { std::cout << "A::f" << std::endl; }
+		};
+
+		class B : public A
+		{
+		public:
+			virtual void f(int) { std::cout << "B::f" << std::endl; }
+		};
+
+		//  输出的竟然是A
+		A  *p = new B();
+		p->f(1);
+	}
+	{
+		class A
+		{
+		public:
+			virtual void f(int) const { std::cout << "A::f " << std::endl; }
+		};
+		class B : public A
+		{
+		public:
+			virtual void f(int) { std::cout << "B::f" << std::endl; }
+		};
+
+		A  *p = new B();
+		p->f(1);
+	}
+	// 上面的两个竟然输出了A
+	{
+		class A
+		{
+		public:
+			virtual void f(short) { std::cout << "A::f" << std::endl; }
+			// 不应当重载这个虚函数
+			virtual void g(int) final { std::cout << "A::g" << std::endl; }
+		};
+		class B : public A
+		{
+		public:
+			// 声明要重载，如果没有重载成功报编译错误
+			virtual void f(short) override { std::cout << "B::f" << std::endl; }
+			// 如果重载将会报错
+			//virtual void g(int) { std::cout << "A::g" << std::endl; } // error C3248: “main::A::g”:  声明为“final”的函数无法被“main::B::g”重写
+			// 确实没有重载
+			virtual void g(float) { std::cout << "A::g" << std::endl; } // 重载
+		};
+	}
+}
+
+void 性质5()
+{
+	//强类型枚举 可以编译通过
+	enum class N1 { None, One, All };
+	enum class N2 { None, One, All };
+	// 传统的方法出现重定义
+	/*
+	enum  A1
+	{
+		None, One, All
+	};
+	enum  A2
+	{
+		None, One, All
+	};*/
+}
+
+void 性质6()
+{
+	// 智能指针
+}
+
+void 性质7()
+{
+	// 匿名函数
+}
+
+void 性质8()
+{
+	// 非成员begin()和end()
+}
+
+void 性质9()
+{
+	// static_assert和 type traits
+}
+
+void 性质10()
+{
+	// Move语义
+}
+
+int _tmain_(int argc, _TCHAR* argv[])
+{
+	性质6();
 	return 0;
 }

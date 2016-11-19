@@ -40,12 +40,12 @@ public:
 		// 保证了只能一个线程在本函数内活跃，单本函数内阻塞的线程可以很多
 		unique_lock<mutex> lck(m_mutex);
 		// 睡眠条件: 不满足生产条件
-		// 唤醒事件：解锁或者notify
+		// 唤醒事件：notify_*后 + 并且能得到锁
 		// 唤醒条件：锁是解开的和满足生产条件
-		m_cv_p.wait(lck, bind([](size_t size, list<data_type> repertory) -> bool
+		m_cv_p.wait(lck, bind([](size_t *size, list<data_type> repertory) -> bool
 		{
-			return repertory.size() < size; 
-		}, m_repertory_size, m_repertory));
+			return repertory.size() < *size; 
+		}, &m_repertory_size, m_repertory));
 		m_repertory.push_back(item);
 		// 此时并不能让别的线程执行，因为锁还没有释放
 		m_cv_c.notify_one();
@@ -95,7 +95,7 @@ void test_consumer()
 	}
 }
 
-int _tmain(int argc, _TCHAR* argv[])
+int _tmain_abc(int argc, _TCHAR* argv[])
 {
 	thread t1(test_producer);
 	thread t2(test_consumer);
