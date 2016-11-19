@@ -115,7 +115,7 @@ void write(int id)
 	printf("%d w end \n", id);
 }
 
-int _tmain(int argc, _TCHAR* argv[])
+int test_read_write()
 {
 	thread t1(read, 1);
 	thread t2(write, 2);

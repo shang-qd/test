@@ -7,6 +7,10 @@
 #include <vector>
 #include <map>
 #include <string>
+#include <memory>
+//#include <functional>
+#include <algorithm> 
+#include <assert.h>
 
 void 性质1()
 {
@@ -141,31 +145,93 @@ void 性质5()
 
 void 性质6()
 {
-	// 智能指针
+	// unique_ptr 不能赋值给另外一个对象（没有拷贝构造函数），要真想这么做就用move吧
+	// 如果就有一个指针指向一个对象就用unique_ptr，如果是多个指针指向一个对象就用shared_ptr（这个类使用了引用计数）
+	// weak_ptr:shared_ptr的助手。 看这个名字都注定是个助手,想对对象进行观察，并且尽可能的降低海森堡效应
+
+	std::unique_ptr<int> px1 = std::make_unique<int>(10);
+	//下面这句话将会引起编译错误
+	//std::unique_ptr<int> px2 = px1;
+
+	auto sp = std::make_shared<int>(10);
+
+	assert(sp.use_count() == 1);
+	std::weak_ptr<int> wp(sp);
+	assert(wp.use_count() == 1);
+	if (!wp.expired())
+	{
+		std::shared_ptr<int> sp2 = wp.lock();
+		*sp2 = 100;
+		assert(wp.use_count() == 2);
+	}
+	assert(wp.use_count() == 1);
 }
 
 void 性质7()
 {
-	// 匿名函数
+	// 如果是条件变量函数指针中使用了匿名函数，当唤醒的时候参数变量的值依然是睡眠时候的值（即便是值已经发生改变）
+	// 这样可以用指针来代替
+	std::vector<int> v;
+	v.push_back(1);
+	v.push_back(2);
+	v.push_back(3);
+	std::for_each(std::begin(v), std::end(v), [](int n) {std::cout << n << std::endl; });
+	auto is_odd = [](int n) {return n % 2 == 1; };
+	auto pos = std::find_if(std::begin(v), std::end(v), is_odd);
+	if (pos != std::end(v))
+	{
+		std::cout << *pos << std::endl;
+	}
 }
 
 void 性质8()
 {
 	// 非成员begin()和end()
+	// 来个例子吧，这个没什么好说的
+	int arr[] = { 1, 2, 3 };
+	std::for_each(std::begin(arr), std::end(arr), [](int n) {std::cout << n << std::endl; });
+	auto is_odd = [](int n) {return n % 2 == 1; };
+	auto pos = std::find_if(std::begin(arr), std::end(arr), is_odd);
+	if (pos != std::end(arr))
+		std::cout << *pos << std::endl;
+}
+
+template <typename T, size_t Size>
+class Vector
+{
+	static_assert(Size > 3, "Size is too small");
+	T _points[Size];
+};
+
+template <typename T1, typename T2>
+T1 add(T1 t1, T2 t2)
+{
+	static_assert(std::is_integral<T1>::value, "Type T1 must be integral");
+	static_assert(std::is_integral<T2>::value, "Type T2 must be integral");
+	return t1 + t2;
 }
 
 void 性质9()
 {
 	// static_assert和 type traits
+	// 这两个主要是用于编译时的(也主要用于高手之人)，就贴上两个例子吧
+	// 1
+	Vector<int, 11> a1;
+	//Vector<double, 2> a2;
+
+	std::cout << add(1, 3) << std::endl;
+	//std::cout << add(1.1, 2) << std::endl;
 }
 
 void 性质10()
 {
-	// Move语义
+	// Move语义 仔细看下面的这篇博文吧，里面说的很清楚了
+	// http://www.cnblogs.com/catch/p/3507883.html
 }
 
-int _tmain_(int argc, _TCHAR* argv[])
+// 还有两个重要的库，线程库和正则表达式
+int _tmain(int argc, _TCHAR* argv[])
 {
-	性质6();
+	性质10();
 	return 0;
 }

@@ -44,7 +44,7 @@ public:
 		// 唤醒条件：锁是解开的和满足生产条件
 		m_cv_p.wait(lck, bind([](size_t *size, list<data_type> repertory) -> bool
 		{
-			return repertory.size() < *size; 
+			return repertory.size() < *size;
 		}, &m_repertory_size, m_repertory));
 		m_repertory.push_back(item);
 		// 此时并不能让别的线程执行，因为锁还没有释放
