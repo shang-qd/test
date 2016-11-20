@@ -18,12 +18,12 @@ private:
 	// 读者数量
 	size_t m_read_c = 0;
 	// 读条件
-	bool read_cond()
+	bool read_cond() const
 	{
 		return false == m_is_w;
 	}
 	// 写条件
-	bool write_cond()
+	bool write_cond() const
 	{
 		return false == m_is_w && 0 == m_read_c;
 	}

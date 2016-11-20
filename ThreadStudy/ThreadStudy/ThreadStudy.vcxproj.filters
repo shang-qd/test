@@ -50,5 +50,8 @@
     <ClCompile Include="SyncExample\read_write.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="C++11.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

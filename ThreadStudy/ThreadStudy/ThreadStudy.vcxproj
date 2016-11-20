@@ -87,6 +87,7 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="C++11.cpp" />
     <ClCompile Include="IOCP\Common.cpp" />
     <ClCompile Include="IOCP\IOCPServer.cpp" />
     <ClCompile Include="SyncExample\read_write.cpp" />
