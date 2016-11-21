@@ -102,7 +102,6 @@ int _tmain_abc(int argc, _TCHAR* argv[])
 	t1.join();
 	t2.join();
 	printf("½áÊø \n");
-	
 	return 0;
 }
 
