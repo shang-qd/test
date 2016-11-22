@@ -3,7 +3,7 @@
 inc := -I/usr/lib/jvm/jdk1.8.0_101/include -I/usr/lib/jvm/jdk1.8.0_101/include/linux
 
 
-all:libHelloWorld.so HelloWorld.class
+all:HelloWorld.class libHelloWorld.so
 	
 
 HelloWorld.class : HelloWorld.java
@@ -19,6 +19,7 @@ run:
 
 clean:
 	rm -f HelloWorld.class
+	rm -f HelloWorld.h
 	rm -f libHelloWorld.so
 	sudo rm -f /usr/lib/libHelloWorld.so
 
