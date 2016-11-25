@@ -5,8 +5,7 @@
  */
 class DangerLogic
 {
-	static
-	{
+	static {
 		// unix下 动态库的名称为libDangerLogic.so
 		// win 下动态库的名称为DangerLogic.dll
 		System.loadLibrary("DangerLogic");
@@ -42,8 +41,7 @@ class DangerLogic
 	 */
 	public native void close_evaluate(long id);
 
-    public static void main(String[] args)   
-    {
+    public static void main(String[] args) {
 		DangerLogic obj = new DangerLogic();
 		// 导航ID
 		int id = 100;
