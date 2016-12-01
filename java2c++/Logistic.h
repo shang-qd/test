@@ -13,7 +13,9 @@ private:
 	const int m_n;
 	// 学习率
 	const double m_a;
-	// 观察数据
+
+	// 观察数据 
+	// 变量这样定义不用写麻烦的拷贝构造函数和赋值函数了
 	shared_ptr<double> m_x;
 	// 标注数据
 	shared_ptr<double> m_y;
@@ -21,8 +23,6 @@ private:
 	shared_ptr<double> m_k;
 
 private:
-	// 梯度函数 i 表示数据的样本，j 表示数据的维数
-	double Gradient(int i, int j) const;
 
 	// 原函数
 	double Fun(int i) const;
@@ -39,13 +39,20 @@ private:
 	void SetK(int j, double v);
 
 public:
+
 	Logistic(int dim,int n);
 	
 	virtual ~Logistic();
 
-	// 学习函数
-	void Study();	
+	// 随机梯度下降
+	void SGD();	
 	
+	// 标准梯度下降
+	void GD();
+
+	// 迷你梯度下降
+	void MGD(int mini);
+
 	// 测试函数
 	void Test();
 };

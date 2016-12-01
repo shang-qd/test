@@ -1,11 +1,29 @@
 // DangerLogic.cpp : 定义控制台应用程序的入口点。
-//
+// 
 
-#include "DangerLogic.h"
 #include "comm_info.h"
 #include "real_time_data.h"
 
+#ifdef WIN32
 
+#include "Test.h"
+#include <iostream>
+#include <thread>
+#include "Logistic.h"
+
+using namespace std;
+
+int main()
+{
+	Logistic obj(9,50);
+	obj.Test();
+	return 0;
+}
+
+
+#else
+
+#include "DangerLogic.h"
 
 JNIEXPORT jfloat JNICALL Java_DangerLogic_anger_1rate
 (JNIEnv *, jobject, jlong id, jfloat engine_speed, jfloat throttle_opening, jint gps_angle, 
@@ -29,8 +47,6 @@ JNIEXPORT void JNICALL Java_DangerLogic_close_1evaluate
 {
 	close_evaluate(id);
 }
-/*
-int main(int argc, char* argv[])
-{
-	return 0;
-}*/
+
+#endif
+
