@@ -1,0 +1,49 @@
+
+other:ab
+pass:abcd
+
+openssl genrsa -des3 -out ./private/PK.pem 2048 
+pass:123456
+
+openssl req -new -key ./private/PK.pem -out ./private/CR.csr
+other:ab
+pass:abcd
+
+
+# 对证书请求自签名
+openssl x509 -req -days 3650 -in ./private/CR.csr -extfile MyTestCA.cnf -extensions MyTestCA_extensions -signkey ./private/PK.pem -out MyTestCA_Certificate.pem
+
+
+openssl genrsa -des3 -out ./client/PK.pem 1024
+pass:123456
+
+openssl req -new -key ./client/pk.pem -out ./client/CR.csr
+other:ab
+pass:abcd
+
+openssl ca -config MyTestCA.cnf -in ./client/CR.csr -out ./client/ClientApp.pem -notext
+
+openssl genrsa -des3 -out ./server/PK.pem 1024
+pass:123456
+
+openssl req -new -key ./server/pk.pem -out ./server/CR.csr
+other:ab
+pass:abcd
+
+openssl ca -config MyTestCA.cnf -in ./server/CR.csr -out ./server/serverApp.pem -notext
+
+
+--==============结束 下面是多级证书，本项目不需要进行多级签证========================
+
+openssl genrsa -des3 -out ./serverCA/PK.pem 1024
+
+openssl req -new -key ./serverCA/PK.pem -out ./serverCA/CR.csr
+
+openssl ca -config MyTestCA.cnf -in ./serverCA/CR.csr -out ./serverCA/serverCA.pem -notext
+
+openssl genrsa -des3 -out ./server/PK.pem 1024
+
+openssl req -new -key  ./server/PK.pem  -out ./server/CR.csr 
+
+openssl x509 -req -days 3650 -in ./server/CR.csr -CA ./serverCA/serverCA.pem -CAkey ./serverCA/PK.pem -CAcreateserial -out ./server/serverApp.pem
+

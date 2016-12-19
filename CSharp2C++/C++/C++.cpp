@@ -5,12 +5,28 @@
 
 #include <stdio.h>
 
-extern "C" __declspec(dllexport)  int _stdcall  Add(int a, int b)
+class A
 {
-	return a + b;
+public:
+	A()
+	{
+		a = 10;
+	}
+	void abc()
+	{
+		printf("%d \n", a);
+	}
+	int a;
+};
+
+extern "C" __declspec(dllexport)  A* _stdcall  Add()
+{
+	A *a = new  A();
+	return a;
 }
 
-extern "C" __declspec(dllexport) void _stdcall cprintf(char *p)
+extern "C" __declspec(dllexport) void _stdcall cprintf(A *p)
 {
-	printf("%s \n", p);
+	p->abc();
 }
+
