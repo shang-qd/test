@@ -52,6 +52,7 @@
     </Compile>
     <Compile Include="Attribute.cs" />
     <Compile Include="nist.cs" />
+    <Compile Include="NistAttr.cs" />
     <Compile Include="pcm.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

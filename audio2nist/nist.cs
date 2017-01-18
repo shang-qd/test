@@ -7,10 +7,11 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
+// 
 namespace audio2nist
 {
     /// <summary>
-    ///  nist 数据文件处理
+    /// nist 数据文件处理
     /// </summary>
     public class nist
     {
@@ -188,6 +189,7 @@ namespace audio2nist
         /// </summary>
         [IndexAttribute(52)]
         public string remark { get; set; }
+
         #endregion
 
         public nist()
@@ -257,7 +259,7 @@ namespace audio2nist
 
         void Write(StreamWriter sw)
         {
-            Dictionary<int, NistInfo> dic = new Dictionary<int,NistInfo>();
+            Dictionary<int, NistInfo> dic = new Dictionary<int, NistInfo>();
             var properties = GetType().GetProperties();
             foreach (var property in properties)
             {
@@ -277,9 +279,9 @@ namespace audio2nist
                 }
             }
             var dicSort = from objDic in dic orderby objDic.Key ascending select objDic;
-            
+
             Encoding e = Encoding.GetEncoding("GB2312");
-            foreach (KeyValuePair<int,NistInfo> kvp in dicSort)
+            foreach (KeyValuePair<int, NistInfo> kvp in dicSort)
             {
                 byte[] bs;
                 if (kvp.Value.Val == null)
@@ -327,11 +329,26 @@ namespace audio2nist
             string len_str = sw.BaseStream.Length.ToString();
             sw.BaseStream.Seek(15 - len_str.Length, SeekOrigin.Begin);
             bs = e.GetBytes(len_str);
-            sw.BaseStream.Write(bs,0,bs.Length);
+            sw.BaseStream.Write(bs, 0, bs.Length);
 
-            sw.BaseStream.Seek(0, SeekOrigin.End);
-            sw.BaseStream.Write(data,0,data.Length);
+            //sw.BaseStream.Seek(0, SeekOrigin.End);
+            //sw.BaseStream.Write(data, 0, data.Length);
             sw.Close();
+
+            //.nist
+            string pcm_file = file.Replace(".nist",".pcm");
+            StreamWriter sw_pcm = new StreamWriter(pcm_file);
+            sw_pcm.BaseStream.Write(data, 0, data.Length);
+            sw_pcm.Close();
+
+            StreamReader nist_read = new StreamReader(file);
+            string res = nist_read.ReadToEnd();
+            res = NistAttr.ZPDecoding(res);
+            nist_read.Close();
+
+            StreamWriter sw_nist = new StreamWriter(file);
+            sw_nist.Write(res);
+            sw_nist.Close();
         }
     }
 }
