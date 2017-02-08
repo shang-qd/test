@@ -1,0 +1,8 @@
+F:\git\test\audio2nist\bin\Release\audio2nist.exe.config
+F:\git\test\audio2nist\bin\Release\audio2nist.exe
+F:\git\test\audio2nist\bin\Release\audio2nist.pdb
+F:\git\test\audio2nist\obj\Release\audio2nist.Form1.resources
+F:\git\test\audio2nist\obj\Release\audio2nist.Properties.Resources.resources
+F:\git\test\audio2nist\obj\Release\audio2nist.csproj.GenerateResource.Cache
+F:\git\test\audio2nist\obj\Release\audio2nist.exe
+F:\git\test\audio2nist\obj\Release\audio2nist.pdb

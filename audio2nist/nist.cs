@@ -228,6 +228,10 @@ namespace audio2nist
                         res += " " + strs[i];
                     }
                     PropertyInfo pi = type.GetProperty(strs[0]);
+                    if (strs[0] == "rejust")
+                    {
+                        continue;
+                    }
                     if (pi.PropertyType == typeof(int))
                     {
                         int i_res;
@@ -310,6 +314,8 @@ namespace audio2nist
 
         public void SaveData(string file)
         {
+            file = file.Replace(".nist", ".textgrid");
+            
             if (channel_count == 2)
             {
                 Shell.WriteLine("{0}：{1}", "错误", "不能处理双通道数据");
@@ -335,15 +341,14 @@ namespace audio2nist
             //sw.BaseStream.Write(data, 0, data.Length);
             sw.Close();
 
-            //.nist
-            string pcm_file = file.Replace(".nist",".pcm");
+            string pcm_file = file.Replace(".textgrid", ".pcm");
             StreamWriter sw_pcm = new StreamWriter(pcm_file);
             sw_pcm.BaseStream.Write(data, 0, data.Length);
             sw_pcm.Close();
 
             StreamReader nist_read = new StreamReader(file);
             string res = nist_read.ReadToEnd();
-            res = NistAttr.ZPDecoding(res);
+            res = NistAttr.ZPEncoding(res);
             nist_read.Close();
 
             StreamWriter sw_nist = new StreamWriter(file);

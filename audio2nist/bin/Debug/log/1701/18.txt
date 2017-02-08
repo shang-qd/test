@@ -1,2 +1,34 @@
 [2017/1/18 10:13:11]注意：启动程序...
 [2017/1/18 10:13:13]注意:程序退出
+[2017/1/18 17:25:16]注意：启动程序...
+[2017/1/18 17:29:37]注意：启动程序...
+[2017/1/18 17:29:39]警告：请填写源路径
+[2017/1/18 17:29:58]错误：1/3:F:\PROCESSED\57f7cbe0d1917.nistSystem.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 audio2nist.nist.LoadData(String file) 位置 f:\git\test\audio2nist\nist.cs:行号 231
+   在 audio2nist.Form1.nist2nist(String src_file, String dst_file) 位置 f:\git\test\audio2nist\Form1.cs:行号 63
+   在 audio2nist.Form1.FileTo(String src_path, String dst_path) 位置 f:\git\test\audio2nist\Form1.cs:行号 128
+[2017/1/18 17:29:58]错误：2/3:F:\PROCESSED\57f8af40e888d.nistSystem.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 audio2nist.nist.LoadData(String file) 位置 f:\git\test\audio2nist\nist.cs:行号 231
+   在 audio2nist.Form1.nist2nist(String src_file, String dst_file) 位置 f:\git\test\audio2nist\Form1.cs:行号 63
+   在 audio2nist.Form1.FileTo(String src_path, String dst_path) 位置 f:\git\test\audio2nist\Form1.cs:行号 128
+[2017/1/18 17:29:58]错误：3/3:F:\PROCESSED\57f8b4cb8deb6.nistSystem.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 audio2nist.nist.LoadData(String file) 位置 f:\git\test\audio2nist\nist.cs:行号 231
+   在 audio2nist.Form1.nist2nist(String src_file, String dst_file) 位置 f:\git\test\audio2nist\Form1.cs:行号 63
+   在 audio2nist.Form1.FileTo(String src_path, String dst_path) 位置 f:\git\test\audio2nist\Form1.cs:行号 128
+[2017/1/18 17:30:40]错误：1/3:F:\PROCESSED\57f7cbe0d1917.nistSystem.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 audio2nist.nist.LoadData(String file) 位置 f:\git\test\audio2nist\nist.cs:行号 231
+   在 audio2nist.Form1.nist2nist(String src_file, String dst_file) 位置 f:\git\test\audio2nist\Form1.cs:行号 63
+   在 audio2nist.Form1.FileTo(String src_path, String dst_path) 位置 f:\git\test\audio2nist\Form1.cs:行号 128
+[2017/1/18 17:30:40]错误：2/3:F:\PROCESSED\57f8af40e888d.nistSystem.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 audio2nist.nist.LoadData(String file) 位置 f:\git\test\audio2nist\nist.cs:行号 231
+   在 audio2nist.Form1.nist2nist(String src_file, String dst_file) 位置 f:\git\test\audio2nist\Form1.cs:行号 63
+   在 audio2nist.Form1.FileTo(String src_path, String dst_path) 位置 f:\git\test\audio2nist\Form1.cs:行号 128
+[2017/1/18 17:30:40]错误：3/3:F:\PROCESSED\57f8b4cb8deb6.nistSystem.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 audio2nist.nist.LoadData(String file) 位置 f:\git\test\audio2nist\nist.cs:行号 231
+   在 audio2nist.Form1.nist2nist(String src_file, String dst_file) 位置 f:\git\test\audio2nist\Form1.cs:行号 63
+   在 audio2nist.Form1.FileTo(String src_path, String dst_path) 位置 f:\git\test\audio2nist\Form1.cs:行号 128
+[2017/1/18 17:31:22]注意：启动程序...
+[2017/1/18 17:33:13]注意：启动程序...
+[2017/1/18 17:33:32]注意：1/3:57f7cbe0d1917.nist
+[2017/1/18 17:33:32]注意：2/3:57f8af40e888d.nist
+[2017/1/18 17:33:32]注意：3/3:57f8b4cb8deb6.nist
