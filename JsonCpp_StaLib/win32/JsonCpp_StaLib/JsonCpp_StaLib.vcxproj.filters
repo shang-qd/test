@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{4ed732c3-9a26-4f7b-90ae-4e5a0b03a7c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\include">
+      <UniqueIdentifier>{3002ac65-83c4-4472-a432-35fb654afa2b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\include\json">
+      <UniqueIdentifier>{b819043f-34d4-4eed-8a18-9cad8c30f6da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\lib_json">
+      <UniqueIdentifier>{3f68a882-eb04-4d22-a2d0-64d2637d7eac}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\include\json\assertions.h">
+      <Filter>src\include\json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\include\json\autolink.h">
+      <Filter>src\include\json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\include\json\config.h">
+      <Filter>src\include\json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\include\json\features.h">
+      <Filter>src\include\json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\include\json\forwards.h">
+      <Filter>src\include\json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\include\json\json.h">
+      <Filter>src\include\json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\include\json\reader.h">
+      <Filter>src\include\json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\include\json\value.h">
+      <Filter>src\include\json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\include\json\version.h">
+      <Filter>src\include\json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\include\json\writer.h">
+      <Filter>src\include\json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\lib_json\json_tool.h">
+      <Filter>src\lib_json</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\lib_json\json_reader.cpp">
+      <Filter>src\lib_json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\lib_json\json_value.cpp">
+      <Filter>src\lib_json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\lib_json\json_writer.cpp">
+      <Filter>src\lib_json</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
